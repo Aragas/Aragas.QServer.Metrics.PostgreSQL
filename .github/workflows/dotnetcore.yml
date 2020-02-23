@@ -1,0 +1,26 @@
+name: NuGet
+
+on: [push]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: Build with dotnet and create nupkg
+      run: dotnet build --configuration Release
+      shell: bash
+    - name: Publish NuGet to GitHub Packages
+      run: |
+           for f in ./bin/Release/*.nupkg
+           do
+             curl -vX PUT -u "vslee:${{ secrets.GHPackagesToken }}" -F package=@$f https://nuget.pkg.github.com/Aragas/
+           done
+      shell: bash
