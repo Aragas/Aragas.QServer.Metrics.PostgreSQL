@@ -10,20 +10,28 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@master
       with:
         dotnet-version: 3.1.100
         source-url: https://nuget.pkg.github.com/Aragas/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GHPackagesToken}}
-    - name: Build with dotnet and create nupkg
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Build
       run: dotnet build --configuration Release
-      shell: bash
-    - name: Publish NuGet to GitHub Packages
+      
+    - name: Pack
+      run: dotnet pack --configuration Release -o "./packages"
+      
+#    - name: Publish
+#      run: dotnet nuget push packages/*.nupkg
+
+    - name: Publish (workaround)
       run: |
-           for f in ./bin/Release/*.nupkg
+           for f in ./packages/*.nupkg
            do
-             curl -vX PUT -u "vslee:${{ secrets.GHPackagesToken }}" -F package=@$f https://nuget.pkg.github.com/Aragas/
+             curl -vX PUT -u "vslee:${{secrets.GITHUB_TOKEN}}" -F package=@$f https://nuget.pkg.github.com/Aragas/
            done
       shell: bash
