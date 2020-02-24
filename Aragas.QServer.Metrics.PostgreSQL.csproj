@@ -4,20 +4,19 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GITHUB_RUN_NUMBER Condition="$(GITHUB_RUN_NUMBER) == ''">1</GITHUB_RUN_NUMBER>
+    <GITHUB_RUN_NUMBER Condition="$(GITHUB_RUN_NUMBER) == ''">0</GITHUB_RUN_NUMBER>
     <Version>1.0.0.$(GITHUB_RUN_NUMBER)</Version>
 
     <Authors>Aragas</Authors>
     <Company>Aragas</Company>
     <Copyright>2020 Aragas</Copyright>
-    <RepositoryUrl>https://github.com/Aragas/Aragas.QServer.Metrics</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Aragas/Aragas.QServer.Metrics.PostgreSQL</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageDescription>Metrics library.</PackageDescription>
+    <PackageDescription>PostgreSQL extension for Metrics.</PackageDescription>
     <PackageIcon>spiral.png</PackageIcon>
-    <PackageIconUrl>https://github.com/Aragas/Aragas.QServer.Metrics/raw/master/spiral.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/Aragas/Aragas.QServer.Metrics</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/Aragas/Aragas.QServer.Metrics.PostgreSQL/raw/master/spiral.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Aragas/Aragas.QServer.Metrics.PostgreSQL</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
