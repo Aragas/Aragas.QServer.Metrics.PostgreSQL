@@ -19,6 +19,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GHPackagesToken }}
       run: ./Set-NuGetCredentials -ConfigFile ./nuget.config -Source aragas-gpr -Username Aragas -Password $env:GITHUB_TOKEN
+    - name: Restore with dotnet
+      run: dotnet restore --configFile nuget.config
+      shell: bash
     - name: Build with dotnet and create nupkg
       run: dotnet build --configuration Release
       shell: bash
