@@ -25,7 +25,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)\Aragas.QServer.Metrics\Aragas.QServer.Metrics.csproj" Condition="Exists('$(SolutionDir)\Aragas.QServer.Metrics\Aragas.QServer.Metrics.csproj')"  />
-    <PackageReference Include="Aragas.QServer.Metrics" Version="*" Condition="!Exists('$(SolutionDir)\Aragas.QServer.Metrics\Aragas.QServer.Metrics.csproj')"/>
+    <!--https://github.com/NuGet/Home/issues/7328#issuecomment-538568759-->
+    <PackageReference Include="Aragas.QServer.Metrics" Version="[*,)" Condition="!Exists('$(SolutionDir)\Aragas.QServer.Metrics\Aragas.QServer.Metrics.csproj')"/>
   </ItemGroup>
 
   <ItemGroup>
