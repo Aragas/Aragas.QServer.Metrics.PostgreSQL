@@ -32,12 +32,14 @@ namespace Aragas.QServer.Metrics
 
             _histogram = new HistogramOptions()
             {
-                Name = $"Service PostgreSQL {connectionName} Response Milliseconds",
+                Name = $"postgresql_{connectionName}_response_milliseconds",
+                Context = "service",
                 MeasurementUnit = Unit.Custom("Milliseconds")
             };
             _gauge = new GaugeOptions()
             {
-                Name = $"Service PostgreSQL {connectionName} Last Response Milliseconds",
+                Name = $"postgresql_{connectionName}_last_response_milliseconds",
+                Context = "service",
                 MeasurementUnit = Unit.Custom("Milliseconds")
             };
             _metrics.Measure.Gauge.SetValue(_gauge, double.PositiveInfinity);
@@ -45,7 +47,7 @@ namespace Aragas.QServer.Metrics
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("{TypeName}: Starting reporting. Delay:{Delay}", GetType().Name, _delay);
+            _logger.LogInformation("Starting reporting. Delay:{Delay}", GetType().Name, _delay);
 
             var stopwatch = new Stopwatch();
             while (!stoppingToken.IsCancellationRequested)
