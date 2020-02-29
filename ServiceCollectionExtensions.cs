@@ -11,13 +11,11 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddNpgSqlMetrics(this IServiceCollection services, string connectionName, string connectionString)
         {
-            services.AddSingleton<IHostedService>(sp => new PostgreSQLMetricsService(
+            return services.AddSingleton<IHostedService>(sp => new PostgreSQLMetricsService(
                 sp.GetRequiredService<IMetrics>(),
                 connectionName,
                 connectionString,
                 sp.GetRequiredService<ILogger<PostgreSQLMetricsService>>()));
-
-            return services;
         }
     }
 }
